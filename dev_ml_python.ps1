@@ -289,6 +289,10 @@ Enable-UAC
 Enable-MicrosoftUpdate
 Install-WindowsUpdate -acceptEula
 
+# --- HARDWARE ---
+choco install -y geforce-game-ready-driver
+#choco install -y geforce-experience
+
 #--- Rename the Computer ---
 # Requires restart, or add the -Restart flag
 $computername = "RenamedPC"
