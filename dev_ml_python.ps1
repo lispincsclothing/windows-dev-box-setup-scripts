@@ -28,8 +28,8 @@ choco install -y googlechrome
 Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
 
 #Taskbar options
-Set-TaskbarOptions -Size Small -Dock Bottom -Combine Full -Lock
-Set-TaskbarOptions -Size Small -Dock Bottom -Combine Full -AlwaysShowIconsOn
+Set-TaskbarOptions -Size Small -Dock Top -Combine Full -Lock
+Set-TaskbarOptions -Size Small -Dock Top -Combine Full -AlwaysShowIconsOn
 
 #--- File Explorer Settings ---
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneExpandToCurrentFolder -Value 1
