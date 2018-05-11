@@ -292,11 +292,13 @@ pip install bs4
 #---- Hosts file -----
 $hostsDir = "~/Documents/Software/Github/Public";
 $hostsGitHubURL = "https://github.com/StevenBlack/hosts";
-mkdir $hostDir
-git clone $hostsGitHubURL $hostsDir
-cd $hostsDir
-./updateHostsWindows.bat
-cd ~
+If (-Not (Test-Path $hostDir)) {
+	mkdir $hostDir
+	git clone $hostsGitHubURL $hostsDir
+	cd $hostsDir
+	./updateHostsWindows.bat
+	cd ~
+}
 
 # --- HARDWARE ---
 choco install -y geforce-game-ready-driver
