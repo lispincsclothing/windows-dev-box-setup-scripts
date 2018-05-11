@@ -58,6 +58,7 @@ choco install -y docker-for-windows
 choco install -y python
 choco install -y pip
 choco install -y 7zip.install
+choco install -y conemu
 #choco install sharex
 
 #--- System Tools ---
