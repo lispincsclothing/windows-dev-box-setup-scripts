@@ -289,13 +289,24 @@ choco install -y pip
 pip install lxml
 pip install bs4
 
-Enable-UAC
-Enable-MicrosoftUpdate
-Install-WindowsUpdate -acceptEula
+#---- Hosts file -----
+$hostsDir = "~/Documents/Software/Github/Public";
+$hostsGitHubURL = "https://github.com/StevenBlack/hosts";
+mkdir $hostDir
+git clone $hostsGitHubURL $hostsDir
+cd $hostsDir
+./updateHostsWindows.bat
+cd ~
 
 # --- HARDWARE ---
 choco install -y geforce-game-ready-driver
 #choco install -y geforce-experience
+
+#-------------------------------------------------
+Enable-UAC
+Enable-MicrosoftUpdate
+Install-WindowsUpdate -acceptEula
+#-------------------------------------------------
 
 #--- Map caps lock to escape ---
 $hexified = "00,00,00,00,00,00,00,00,02,00,00,00,01,00,3a,00,00,00,00,00".Split(',') | % { "0x$_"};
