@@ -270,6 +270,21 @@ choco install -y visualstudiocode
 #--- VS Code extensions ---
 choco install -y vscode-docker
 
+#--- Visual Studio ---
+choco install -y visualstudio2017community
+
+#--- Unity ---
+choco install -y unity
+
+#--- Java ---
+choco install -y jdk8
+
+#--- Intellij ---
+choco install -y intellijidea-ultimate
+
+#--- Android Studio ---
+choco install -y androidstudio
+
 Enable-UAC
 Enable-MicrosoftUpdate
 Install-WindowsUpdate -acceptEula
