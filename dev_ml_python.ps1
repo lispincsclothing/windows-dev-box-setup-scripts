@@ -261,7 +261,6 @@ If (-Not (Test-Path "HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Adv
 }
 Set-ItemProperty -Path "HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name PeopleBand -Type DWord -Value 0
 
-
 # TODO: install additional ML tools
 
 #--- VS Code ---
@@ -273,3 +272,10 @@ choco install -y vscode-docker
 Enable-UAC
 Enable-MicrosoftUpdate
 Install-WindowsUpdate -acceptEula
+
+#--- Rename the Computer ---
+# Requires restart, or add the -Restart flag
+$computername = "RenamedPC"
+if ($env:computername -ne $computername) {
+	Rename-Computer -NewName $computername
+}
