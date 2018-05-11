@@ -55,8 +55,6 @@ choco install -y inconsolata
 
 #--- Tools ---
 choco install -y docker-for-windows
-choco install -y python
-choco install -y pip
 choco install -y 7zip.install
 choco install -y conemu
 #choco install sharex
@@ -284,6 +282,12 @@ choco install -y intellijidea-ultimate
 
 #--- Android Studio ---
 choco install -y androidstudio
+
+#---- Python + extensions ---
+choco install -y python
+choco install -y pip
+pip install lxml
+pip install bs4
 
 Enable-UAC
 Enable-MicrosoftUpdate
