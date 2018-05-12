@@ -300,10 +300,10 @@ $hostsDir = "~/Documents/Software/Github/Public";
 $hostsGitHubURL = "https://github.com/StevenBlack/hosts";
 If (-Not (Test-Path $hostsDir)) {
 	mkdir $hostsDir
-	git clone $hostsGitHubURL $hostsDir
-	cd $hostsDir
-	./updateHostsWindows.bat
-	cd ~
+	git clone $hostsGitHubURL $hostsDir/StevenBlackHosts
+	#cd $hostsDir
+	#updateHostsWindows.bat
+	#cd ~
 }
 
 # --- HARDWARE ---
