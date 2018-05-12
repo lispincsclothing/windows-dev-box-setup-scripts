@@ -311,12 +311,6 @@ choco install -y geforce-game-ready-driver
 #choco install -y geforce-experience
 choco install -y DellCommandUpdate
 
-#-------------------------------------------------
-Enable-UAC
-Enable-MicrosoftUpdate
-Install-WindowsUpdate -acceptEula
-#-------------------------------------------------
-
 #--- Map caps lock to escape ---
 $hexified = "00,00,00,00,00,00,00,00,02,00,00,00,01,00,3a,00,00,00,00,00".Split(',') | % { "0x$_"};
 $kbLayout = 'HKLM:\System\CurrentControlSet\Control\Keyboard Layout';
@@ -334,3 +328,11 @@ $computername = "RenamedPC"
 if ($env:computername -ne $computername) {
 	Rename-Computer -NewName $computername
 }
+
+#-------------------------------------------------
+Enable-UAC
+Enable-MicrosoftUpdate
+Install-WindowsUpdate -acceptEula
+#-------------------------------------------------
+
+
