@@ -309,6 +309,7 @@ If (-Not (Test-Path $hostDir)) {
 # --- HARDWARE ---
 choco install -y geforce-game-ready-driver
 #choco install -y geforce-experience
+choco install -y DellCommandUpdate
 
 #-------------------------------------------------
 Enable-UAC
