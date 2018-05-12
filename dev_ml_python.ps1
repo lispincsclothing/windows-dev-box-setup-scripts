@@ -254,6 +254,35 @@ powercfg /setdcvalueindex scheme_min sub_buttons lidaction 0
 # To Restore:
 Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Power' -Name AwayModeEnabled -Type DWord -Value 0
 
+#Set night shift schedule on (mirror circadian rhythm)
+#https://github.com/jaapbrasser/SharedScripts/blob/master/Set-BlueLight/Set-BlueLight.ps1
+$BlueLightOption = @{
+	Off          = [byte[]](2,0,0,0,147,250,216,91,185,109,210,1,0,0,0,0,67,66,1,0,208,10,2,198,20,202,236,227,222,149,183,155,233,1,0)
+	On           = [byte[]](2,0,0,0,128,208,150,171,186,109,210,1,0,0,0,0,67,66,1,0,16,0,208,10,2,198,20,221,137,219,220,170,183,155,233,1,0)
+	AutoOn       = [byte[]](2,0,0,0,89,63,239,213,232,109,210,1,0,0,0,0,67,66,1,0,2,1,202,20,14,21,0,202,30,14,7,0,207,40,188,62,202,50,14,16,46,54,0,202,60,14,8,46,46,0,0)
+	AutoOff      = [byte[]](2,0,0,0,175,164,252,55,235,109,210,1,0,0,0,0,67,66,1,0,202,20,14,21,0,202,30,14,7,0,207,40,188,62,202,50,14,16,46,54,0,202,60,14,8,46,46,0,0)
+	NoShift      = [byte[]](2,0,0,0,255,124,43,3,82,107,210,1,0,0,0,0,67,66,1,0,2,1,202,20,14,21,0,202,30,14,7,0,207,40,168,70,202,50,14,16,46,49,0,202,60,14,8,46,47,0,0)
+	MinimumShift = [byte[]](2,0,0,0,224,193,179,114,82,107,210,1,0,0,0,0,67,66,1,0,2,1,202,20,14,21,0,202,30,14,7,0,207,40,236,57,202,50,14,16,46,49,0,202,60,14,8,46,47,0,0)
+	MediumShift  = [byte[]](2,0,0,0,49,229,185,33,82,107,210,1,0,0,0,0,67,66,1,0,2,1,202,20,14,21,0,202,30,14,7,0,207,40,200,42,202,50,14,16,46,49,0,202,60,14,8,46,47,0,0)
+	LargeShift   = [byte[]](2,0,0,0,22,255,5,128,82,107,210,1,0,0,0,0,67,66,1,0,2,1,202,20,14,21,0,202,30,14,7,0,207,40,138,27,202,50,14,16,46,49,0,202,60,14,8,46,47,0,0)
+	MaximumShift = [byte[]](2,0,0,0,199,91,231,198,81,107,210,1,0,0,0,0,67,66,1,0,2,1,202,20,14,21,0,202,30,14,7,0,207,40,208,15,202,50,14,16,46,49,0,202,60,14,8,46,47,0,0)
+}
+$SetRegistrySplat = @{
+	Path  = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount\{0}\Current'
+	Force = $true
+	Name  = 'Data'
+}
+function Set-RegistryValue {
+	if (-not (Test-Path -Path $SetRegistrySplat.Path)) {
+			New-Item -Path $SetRegistrySplat.Path -Force
+	} else {
+		Set-ItemProperty @SetRegistrySplat
+	}
+}
+$SetRegistrySplat.Path  = $SetRegistrySplat.Path -f '$$windows.data.bluelightreduction.settings'
+$SetRegistrySplat.Value = $BlueLightOption.AutoOn
+Set-RegistryValue
+				
 # Use the Windows 7-8.1 Style Volume Mixer
 If (-Not (Test-Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\MTCUVC")) {
 	New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name MTCUVC | Out-Null
