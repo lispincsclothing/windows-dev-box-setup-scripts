@@ -242,6 +242,12 @@ Set-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization
 #https://www.tenforums.com/tutorials/69762-change-lid-close-default-action-windows-10-a.html
 #powercfg -setdcvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 0
 #powercfg -setacvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 0
+# DOES WORK -  scheme_min is high performance, set to current scheme
+powercfg /s scheme_min
+#plugged in
+powercfg /setacvalueindex scheme_min sub_buttons lidaction 0
+#dc is battery power
+powercfg /setdcvalueindex scheme_min sub_buttons lidaction 0
 
 # Lock screen (not sleep) on lid close
 Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Power' -Name AwayModeEnabled -Type DWord -Value 1
@@ -296,15 +302,15 @@ pip install lxml
 pip install bs4
 
 #---- Hosts file -----
-$hostsDir = "~/Documents/Software/Github/Public";
-$hostsGitHubURL = "https://github.com/StevenBlack/hosts";
-If (-Not (Test-Path $hostsDir)) {
-	mkdir $hostsDir
-	git clone $hostsGitHubURL $hostsDir/StevenBlackHosts
-	#cd $hostsDir
-	#updateHostsWindows.bat
-	#cd ~
-}
+# $hostsDir = "~/Documents/Software/Github/Public";
+# $hostsGitHubURL = "https://github.com/StevenBlack/hosts";
+# If (-Not (Test-Path $hostsDir)) {
+# 	mkdir $hostsDir
+# 	git clone $hostsGitHubURL $hostsDir/StevenBlackHosts
+# 	#cd $hostsDir
+# 	#updateHostsWindows.bat
+# 	#cd ~
+# }
 
 # --- HARDWARE ---
 choco install -y geforce-game-ready-driver
@@ -320,7 +326,6 @@ IF(!(Test-Path $kbLayout)){
 ELSE {
 	New-ItemProperty -Path $kbLayout -Name "Scancode Map" -PropertyType Binary -Force -Value ([byte[]]$hexified);
 }
-
 
 #--- Rename the Computer ---
 # Requires restart, or add the -Restart flag
