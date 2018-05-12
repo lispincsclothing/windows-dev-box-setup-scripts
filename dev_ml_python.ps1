@@ -298,7 +298,7 @@ pip install bs4
 #---- Hosts file -----
 $hostsDir = "~/Documents/Software/Github/Public";
 $hostsGitHubURL = "https://github.com/StevenBlack/hosts";
-If (-Not (Test-Path $hostDir)) {
+If (-Not (Test-Path $hostsDir)) {
 	mkdir $hostsDir
 	git clone $hostsGitHubURL $hostsDir
 	cd $hostsDir
