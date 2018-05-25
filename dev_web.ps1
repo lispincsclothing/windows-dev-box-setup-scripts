@@ -14,9 +14,8 @@ Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name MMTaskbarMode -Value 2
 
 #--- Tools ---
-choco install -y visualstudiocode
+choco install -y vscode
 choco install -y git -params '"/GitAndUnixToolsOnPath /WindowsTerminal"'
-choco install -y Git-Credential-Manager-for-Windows
 choco install -y 7zip.install
 
 #--- Windows Subsystems/Features ---
@@ -54,7 +53,6 @@ choco install -y inconsolata
 choco install -y sysinternals
 choco install -y docker-for-windows
 choco install -y python
-choco install -y pip
 
 Enable-UAC
 Enable-MicrosoftUpdate

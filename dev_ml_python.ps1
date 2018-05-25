@@ -39,7 +39,6 @@ Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\
 
 #--- Git ---
 choco install -y git -params '"/GitAndUnixToolsOnPath /WindowsTerminal"'
-choco install -y Git-Credential-Manager-for-Windows
 
 #--- Windows Subsystems/Features ---
 choco install -y Microsoft-Hyper-V-All -source windowsFeatures
@@ -55,6 +54,7 @@ choco install -y inconsolata
 
 #--- Tools ---
 choco install -y docker-for-windows
+choco install -y python
 choco install -y 7zip.install
 choco install -y conemu
 #choco install sharex
@@ -304,7 +304,7 @@ Set-ItemProperty -Path "HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\
 # TODO: install additional ML tools
 
 #--- VS Code ---
-choco install -y visualstudiocode
+choco install -y vscode
 
 #--- VS Code extensions ---
 choco install -y vscode-docker
@@ -356,12 +356,15 @@ ELSE {
 	New-ItemProperty -Path $kbLayout -Name "Scancode Map" -PropertyType Binary -Force -Value ([byte[]]$hexified);
 }
 
+#RESTART COMPUTER AFTER 
 #--- Rename the Computer ---
 # Requires restart, or add the -Restart flag
 $computername = "RenamedPC"
 if ($env:computername -ne $computername) {
 	Rename-Computer -NewName $computername
 }
+
+manage-bde -on C:
 
 #-------------------------------------------------
 Enable-UAC

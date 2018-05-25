@@ -14,9 +14,8 @@ Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name MMTaskbarMode -Value 2
 
 #--- Tools ---
-choco install -y visualstudiocode
+choco install -y vscode
 choco install -y git -params '"/GitAndUnixToolsOnPath /WindowsTerminal"'
-choco install -y Git-Credential-Manager-for-Windows
 choco install -y 7zip.install
 
 #--- Windows Subsystems/Features ---
@@ -43,7 +42,6 @@ choco install -y visualstudio2017-workload-vctools
 choco install -y sysinternals
 choco install -y docker-for-windows
 choco install -y python2 # Node.js requires Python 2 to build native modules
-choco install -y pip
 
 Enable-UAC
 Enable-MicrosoftUpdate
