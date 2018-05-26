@@ -24,6 +24,11 @@ choco install -y avastfreeantivirus
 #Chrome web browser
 choco install -y googlechrome
 
+# --- HARDWARE ---
+choco install -y geforce-game-ready-driver
+#choco install -y geforce-experience
+choco install -y DellCommandUpdate
+
 #--- Windows Features ---
 Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
 
@@ -36,6 +41,21 @@ Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Value 1
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name MMTaskbarMode -Value 2
+
+#--- Map caps lock to escape ---
+$hexified = "00,00,00,00,00,00,00,00,02,00,00,00,01,00,3a,00,00,00,00,00".Split(',') | % { "0x$_"};
+$kbLayout = 'HKLM:\System\CurrentControlSet\Control\Keyboard Layout';
+IF(!(Test-Path $kbLayout)){
+	New-ItemProperty -Path $kbLayout -Name "Scancode Map" -PropertyType Binary -Value ([byte[]]$hexified);
+}
+ELSE {
+	New-ItemProperty -Path $kbLayout -Name "Scancode Map" -PropertyType Binary -Force -Value ([byte[]]$hexified);
+}
+
+#Screensaver 
+reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v SCRNSAVE.EXE /t REG_SZ /d C:\Windows\system32\Bubbles.scr /f
+#Enable lock screen with screensaver
+reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v ScreenSaveTimeOut /t REG_SZ /d 600 /f
 
 #--- Git ---
 choco install -y git -params '"/GitAndUnixToolsOnPath /WindowsTerminal"'
@@ -341,20 +361,6 @@ pip install bs4
 # 	#cd ~
 # }
 
-# --- HARDWARE ---
-choco install -y geforce-game-ready-driver
-#choco install -y geforce-experience
-choco install -y DellCommandUpdate
-
-#--- Map caps lock to escape ---
-$hexified = "00,00,00,00,00,00,00,00,02,00,00,00,01,00,3a,00,00,00,00,00".Split(',') | % { "0x$_"};
-$kbLayout = 'HKLM:\System\CurrentControlSet\Control\Keyboard Layout';
-IF(!(Test-Path $kbLayout)){
-	New-ItemProperty -Path $kbLayout -Name "Scancode Map" -PropertyType Binary -Value ([byte[]]$hexified);
-}
-ELSE {
-	New-ItemProperty -Path $kbLayout -Name "Scancode Map" -PropertyType Binary -Force -Value ([byte[]]$hexified);
-}
 
 #RESTART COMPUTER AFTER 
 #--- Rename the Computer ---
@@ -364,6 +370,8 @@ if ($env:computername -ne $computername) {
 	Rename-Computer -NewName $computername
 }
 
+#Turn on bitlocker
+#https://docs.microsoft.com/en-us/windows/security/information-protection/bitlocker/bitlocker-basic-deployment
 manage-bde -on C:
 
 #-------------------------------------------------
