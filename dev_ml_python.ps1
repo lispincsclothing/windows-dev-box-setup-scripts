@@ -19,7 +19,7 @@
 Disable-UAC
 
 #First install antivirus 
-choco install -y avastfreeantivirus
+#choco install -y avastfreeantivirus
 
 #Chrome web browser
 choco install -y googlechrome
