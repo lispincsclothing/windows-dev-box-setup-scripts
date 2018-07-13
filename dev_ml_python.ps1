@@ -73,7 +73,7 @@ choco install -y inconsolata
 # choco install -y ubuntu.font
 
 #--- Tools ---
-choco install -y docker-for-windows
+#choco install -y docker-for-windows
 choco install -y python
 choco install -y 7zip.install
 choco install -y conemu
