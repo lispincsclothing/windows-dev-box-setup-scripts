@@ -80,7 +80,7 @@ choco install -y conemu
 #choco install sharex
 
 #--- System Tools ---
-choco install -y sysinternals
+#choco install -y sysinternals
 
 #--- Uninstall unecessary applications that come with Windows out of the box ---
 
@@ -345,10 +345,10 @@ Set-ItemProperty -Path "HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\
 #choco install -y androidstudio
 
 #---- Python + extensions ---
-choco install -y python
-choco install -y pip
-pip install lxml
-pip install bs4
+#choco install -y python
+#choco install -y pip
+#pip install lxml
+#pip install bs4
 
 #---- Hosts file -----
 # $hostsDir = "~/Documents/Software/Github/Public";
