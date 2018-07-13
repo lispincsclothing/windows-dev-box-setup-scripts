@@ -58,7 +58,7 @@ reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v SCRNSAVE.EXE /t REG_SZ /d C
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v ScreenSaveTimeOut /t REG_SZ /d 600 /f
 
 #--- Git ---
-choco install -y git -params '"/GitAndUnixToolsOnPath /WindowsTerminal"'
+#choco install -y git -params '"/GitAndUnixToolsOnPath /WindowsTerminal"'
 
 #--- Windows Subsystems/Features ---
 choco install -y Microsoft-Hyper-V-All -source windowsFeatures
@@ -324,25 +324,25 @@ Set-ItemProperty -Path "HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\
 # TODO: install additional ML tools
 
 #--- VS Code ---
-choco install -y vscode
+#choco install -y vscode
 
 #--- VS Code extensions ---
-choco install -y vscode-docker
+#choco install -y vscode-docker
 
 #--- Visual Studio ---
-choco install -y visualstudio2017community
+#choco install -y visualstudio2017community
 
 #--- Unity ---
-choco install -y unity
+#choco install -y unity
 
 #--- Java ---
-choco install -y jdk8
+#choco install -y jdk8
 
 #--- Intellij ---
-choco install -y intellijidea-ultimate
+#choco install -y intellijidea-ultimate
 
 #--- Android Studio ---
-choco install -y androidstudio
+#choco install -y androidstudio
 
 #---- Python + extensions ---
 choco install -y python
